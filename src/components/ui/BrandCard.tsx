@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Link from 'next/link';
-import { IBrand } from '../../../interface/IBrand';
+import { Brand } from '../../../interface/Brand';
 
-export function BrandCard({ brand }: { brand: IBrand }) {
+export function BrandCard({ brand }: { brand: Brand }) {
   return (
     <Link
       href={`/products?brand=${brand._id}`}

@@ -1,10 +1,10 @@
-import { IProduct } from '../interface/IProduct';
-import { ICategory } from '../interface/ICategory';
-import { IBrand } from '../interface/IBrand';
-import { ISubCategory } from '../interface/ISubCategory';
-import { IAuthResponse, ILoginPayload, IRegisterPayload } from '../interface/IAuth';
-import { IWishlistResponse } from '../interface/IWishlist';
-import { IOrder, ICreateOrderPayload } from '../interface/IOrder';
+import { Product } from '../interface/Product';
+import { Category } from '../interface/Category';
+import { Brand } from '../interface/Brand';
+import { SubCategory } from '../interface/SubCategory';
+import { AuthResponse, LoginPayload, RegisterPayload } from '../interface/Auth';
+import { WishlistResponse } from '../interface/Wishlist';
+import { Order, CreateOrderPayload } from '../interface/Order';
 import { AddToCartResponse } from '../interface/cart/AddToCartResponse';
 import { ResponseType } from '../types/Responsetype';
 
@@ -23,7 +23,7 @@ function getHeaders(token?: string) {
 
 class ApiService {
   // ─── Auth ───────────────────────────────────────────────────────────────────
-  async login(payload: ILoginPayload): Promise<IAuthResponse> {
+  async login(payload: LoginPayload): Promise<AuthResponse> {
     const res = await fetch(`${BASE_URL}/auth/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -32,7 +32,7 @@ class ApiService {
     return res.json();
   }
 
-  async register(payload: IRegisterPayload): Promise<IAuthResponse> {
+  async register(payload: RegisterPayload): Promise<AuthResponse> {
     const res = await fetch(`${BASE_URL}/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -42,49 +42,49 @@ class ApiService {
   }
 
   // ─── Products ────────────────────────────────────────────────────────────────
-  async getProducts(brandId?: string): Promise<IProduct[]> {
+  async getProducts(brandId?: string): Promise<Product[]> {
     let url = `${BASE_URL}/products?limit=40`;
     if (brandId) {
       url += `&brand=${brandId}`;
     }
     const res = await fetch(url);
-    const data: ResponseType<IProduct> = await res.json();
+    const data: ResponseType<Product> = await res.json();
     return data.data;
   }
 
-  async getProductDetails(productID: string): Promise<IProduct> {
+  async getProductDetails(productID: string): Promise<Product> {
     const res = await fetch(`${BASE_URL}/products/${productID}`);
     const product = await res.json();
     return product.data;
   }
 
   // ─── Categories ──────────────────────────────────────────────────────────────
-  async getCategories(): Promise<ICategory[]> {
+  async getCategories(): Promise<Category[]> {
     const res = await fetch(`${BASE_URL}/categories`);
-    const data: ResponseType<ICategory> = await res.json();
+    const data: ResponseType<Category> = await res.json();
     return data.data;
   }
 
-  async getCategoryDetails(categoryId: string): Promise<ICategory> {
+  async getCategoryDetails(categoryId: string): Promise<Category> {
     const res = await fetch(`${BASE_URL}/categories/${categoryId}`);
     const data = await res.json();
     return data.data;
   }
 
-  async getSubcategoriesOnCategory(categoryId: string): Promise<ISubCategory[]> {
+  async getSubcategoriesOnCategory(categoryId: string): Promise<SubCategory[]> {
     const res = await fetch(`${BASE_URL}/categories/${categoryId}/subcategories`);
     const data = await res.json();
     return data.data;
   }
 
   // ─── Brands ──────────────────────────────────────────────────────────────────
-  async getBrands(): Promise<IBrand[]> {
+  async getBrands(): Promise<Brand[]> {
     const res = await fetch(`${BASE_URL}/brands`);
-    const data: ResponseType<IBrand> = await res.json();
+    const data: ResponseType<Brand> = await res.json();
     return data.data;
   }
 
-  async getBrandDetails(brandId: string): Promise<IBrand> {
+  async getBrandDetails(brandId: string): Promise<Brand> {
     const res = await fetch(`${BASE_URL}/brands/${brandId}`);
     const data = await res.json();
     return data.data;
@@ -133,14 +133,14 @@ class ApiService {
   }
 
   // ─── Wishlist ────────────────────────────────────────────────────────────────
-  async getWishlist(token?: string): Promise<IWishlistResponse> {
+  async getWishlist(token?: string): Promise<WishlistResponse> {
     const res = await fetch(`${BASE_URL}/wishlist`, {
       headers: getHeaders(token),
     });
     return res.json();
   }
 
-  async addToWishlist(productId: string, token?: string): Promise<IWishlistResponse> {
+  async addToWishlist(productId: string, token?: string): Promise<WishlistResponse> {
     const res = await fetch(`${BASE_URL}/wishlist`, {
       method: 'POST',
       headers: getHeaders(token),
@@ -149,7 +149,7 @@ class ApiService {
     return res.json();
   }
 
-  async removeFromWishlist(productId: string, token?: string): Promise<IWishlistResponse> {
+  async removeFromWishlist(productId: string, token?: string): Promise<WishlistResponse> {
     const res = await fetch(`${BASE_URL}/wishlist/${productId}`, {
       method: 'DELETE',
       headers: getHeaders(token),
@@ -158,14 +158,14 @@ class ApiService {
   }
 
   // ─── Orders ──────────────────────────────────────────────────────────────────
-  async getUserOrders(userId: string, token?: string): Promise<IOrder[]> {
+  async getUserOrders(userId: string, token?: string): Promise<Order[]> {
     const res = await fetch(`${BASE_URL}/orders/user/${userId}`, {
       headers: getHeaders(token),
     });
     return res.json();
   }
 
-  async createCashOrder(cartId: string, payload: ICreateOrderPayload, token?: string): Promise<{ status: string; data: IOrder }> {
+  async createCashOrder(cartId: string, payload: CreateOrderPayload, token?: string): Promise<{ status: string; data: Order }> {
     const res = await fetch(`${BASE_URL}/orders/${cartId}`, {
       method: 'POST',
       headers: getHeaders(token),
@@ -174,7 +174,7 @@ class ApiService {
     return res.json();
   }
 
-  async createOnlineOrder(cartId: string, payload: ICreateOrderPayload, token?: string): Promise<{ status: string; session: { url: string } }> {
+  async createOnlineOrder(cartId: string, payload: CreateOrderPayload, token?: string): Promise<{ status: string; session: { url: string } }> {
     const res = await fetch(
       `${BASE_URL}/orders/checkout-session/${cartId}?url=${typeof window !== 'undefined' ? window.location.origin : ''}`,
       {

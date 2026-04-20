@@ -1,5 +1,5 @@
 // Auth types
-export interface IUser {
+export interface User {
   _id: string;
   name: string;
   email: string;
@@ -8,12 +8,12 @@ export interface IUser {
   token?: string;
 }
 
-export interface ILoginPayload {
+export interface LoginPayload {
   email: string;
   password: string;
 }
 
-export interface IRegisterPayload {
+export interface RegisterPayload {
   name: string;
   email: string;
   password: string;
@@ -21,8 +21,8 @@ export interface IRegisterPayload {
   phone: string;
 }
 
-export interface IAuthResponse {
+export interface AuthResponse {
   message: string;
-  user?: IUser;
+  user?: User;
   token?: string;
 }

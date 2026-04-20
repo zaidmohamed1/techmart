@@ -10,14 +10,14 @@ import { useCart } from '../../context/CartContext';
 import { formatPrice } from '@/lib/utils';
 import { PageLoader } from '@/components/ui/SkeletonCard';
 import apiService from '../../../services/api';
-import { IProduct } from '../../../interface/IProduct';
+import { Product } from '../../../interface/Product';
 
 export default function WishlistPage() {
   const router = useRouter();
   const { isAuthenticated, isLoading: authLoading, token } = useAuth();
   const { wishlistIds, removeFromWishlist } = useWishlist();
   const { addToCart } = useCart();
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {

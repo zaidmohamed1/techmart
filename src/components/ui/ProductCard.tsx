@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Heart, ShoppingCart, Star, Loader2, Check } from 'lucide-react';
 import Link from 'next/link';
-import { IProduct } from '../../../interface/IProduct';
+import { Product } from '../../../interface/Product';
 import { formatPrice } from '@/lib/utils';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -21,7 +21,7 @@ function renderStars(rating: number) {
   ));
 }
 
-export default function ProductCard({ product }: { product: IProduct }) {
+export default function ProductCard({ product }: { product: Product }) {
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const inWishlist = isInWishlist(product._id);

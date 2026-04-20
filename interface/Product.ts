@@ -1,8 +1,8 @@
-import { Brand } from './iBrand';
-import { Category } from './ICategory';
-import { SubCategory } from './iSubcategory';
+import { Brand } from './Brand';
+import { Category } from './Category';
+import { SubCategory } from './SubCategory';
 
-export interface IProduct {
+export interface Product {
   _id: string;
   id: string;
   title: string;

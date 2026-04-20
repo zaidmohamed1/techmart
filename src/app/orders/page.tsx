@@ -15,7 +15,7 @@ import { useAuth } from '../../context/AuthContext';
 import { formatPrice } from '@/lib/utils';
 import { PageLoader } from '@/components/ui/SkeletonCard';
 import apiService from '../../../services/api';
-import { IOrder } from '../../../interface/IOrder';
+import { Order } from '../../../interface/Order';
 
 function StatusBadge({ isPaid, isDelivered }: { isPaid: boolean; isDelivered: boolean }) {
   if (isDelivered) {
@@ -42,7 +42,7 @@ function StatusBadge({ isPaid, isDelivered }: { isPaid: boolean; isDelivered: bo
 export default function OrdersPage() {
   const router = useRouter();
   const { isAuthenticated, isLoading: authLoading, user, token } = useAuth();
-  const [orders, setOrders] = useState<IOrder[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {

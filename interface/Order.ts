@@ -1,23 +1,23 @@
-import { IProduct } from './IProduct';
+import { Product } from './Product';
 
-export interface IOrderItem {
-  product: IProduct;
+export interface OrderItem {
+  product: Product;
   count: number;
   price: number;
   _id: string;
 }
 
-export interface IShippingAddress {
+export interface ShippingAddress {
   details: string;
   phone: string;
   city: string;
 }
 
-export interface IOrder {
+export interface Order {
   _id: string;
   user: { name: string; email: string; phone: string };
-  cartItems: IOrderItem[];
-  shippingAddress: IShippingAddress;
+  cartItems: OrderItem[];
+  shippingAddress: ShippingAddress;
   paymentMethodType: 'cash' | 'card';
   totalOrderPrice: number;
   taxPrice: number;
@@ -31,6 +31,6 @@ export interface IOrder {
   id: string;
 }
 
-export interface ICreateOrderPayload {
-  shippingAddress: IShippingAddress;
+export interface CreateOrderPayload {
+  shippingAddress: ShippingAddress;
 }

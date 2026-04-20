@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { IProduct } from '../../interface/IProduct';
+import { Product } from '../../interface/Product';
 import Link from 'next/link';
 import apiService from '../../services/api';
 import { Loader2 } from 'lucide-react';
@@ -62,7 +62,7 @@ const ShieldCheckIcon = ({ className = "w-5 h-5" }) => (
 
 
 // --- Main Component ---
-export default function ProductDetail( { product } : { product: IProduct } ) {
+export default function ProductDetail( { product } : { product: Product } ) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);

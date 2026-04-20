@@ -1,6 +1,6 @@
-import type { ICategory } from '../ICategory';
-import type { IBrand } from '../iBrand';
-import type { ISubCategory } from '../iSubcategory';
+import type { Category } from '../Category';
+import type { Brand } from '../Brand';
+import type { SubCategory } from '../SubCategory';
 
 export interface CartProduct {
   count: number;
@@ -15,8 +15,8 @@ interface Product {
   slug: string;
   quantity: number;
   imageCover: string;
-  category: ICategory;
-  brand: IBrand;
-  subcategory: ISubCategory[];
+  category: Category;
+  brand: Brand;
+  subcategory: SubCategory[];
   ratingsAverage: number;
 }

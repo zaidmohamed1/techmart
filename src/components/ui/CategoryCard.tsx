@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Link from 'next/link';
-import { ICategory } from '../../../interface/ICategory';
+import { Category } from '../../../interface/Category';
 
-export function CategoryCard({ category }: { category: ICategory }) {
+export function CategoryCard({ category }: { category: Category }) {
   return (
     <Link
       href={`/categories/${category._id}`}
