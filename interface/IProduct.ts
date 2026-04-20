@@ -1,6 +1,6 @@
-import { IBrand } from './iBrand';
-import { ICategory } from './ICategory';
-import { ISubCategory } from './iSubcategory';
+import { Brand } from './iBrand';
+import { Category } from './ICategory';
+import { SubCategory } from './iSubcategory';
 
 export interface IProduct {
   _id: string;
@@ -19,7 +19,7 @@ export interface IProduct {
   createdAt: string;
   updatedAt: string;
 
-  category: ICategory;
-  brand: IBrand;
-  subcategory: ISubCategory[];
+  category: Category;
+  brand: Brand;
+  subcategory: SubCategory[];
 } 
